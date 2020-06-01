@@ -7,7 +7,7 @@ class GameConsole extends StatefulWidget {
 }
 
 class _GameConsoleState extends State<GameConsole> {
-  String winner="";
+  String winner = "no results yet";
   int index;
   List<TicTacToeItem> items = [
     new TicTacToeItem("1"),
@@ -25,7 +25,6 @@ class _GameConsoleState extends State<GameConsole> {
       items[index].element = "X";
       checkWinner();
     });
-    
   }
 
   void chooseO(index) {
@@ -34,37 +33,40 @@ class _GameConsoleState extends State<GameConsole> {
       checkWinner();
     });
   }
-  String showWinner(){
+
+  String showWinner() {
     setState(() {
       checkWinner();
     });
     return winner;
   }
- 
+
   void checkWinner() {
-    if(items[0].element==items[1].element && items[1].element==items[2].element) {
-      winner = "player "+items[0].element + " wins!";
-    }
-    else if(items[0].element==items[4].element && items[4].element==items[8].element) {
-      winner = "player "+ items[0].element + " wins!";
-    }//diagonal checking
-    else if(items[2].element==items[4].element && items[4].element==items[6].element) {
-      winner = "player "+ items[2].element + " wins!";
-    }//diagonal checking
-    else if(items[3].element==items[4].element && items[4].element==items[5].element) {
-      winner = "player "+ items[3].element + " wins!";
-    }
-    else if(items[6].element==items[7].element && items[7].element==items[8].element) {
-      winner = "player "+ items[6].element + " wins!";
-    }
-    else if(items[0].element==items[3].element && items[3].element==items[6].element) {
-      winner = "player "+ items[0].element + " wins!";
-    }
-    else if(items[2].element==items[5].element && items[5].element==items[8].element) {
-      winner = "player "+ items[2].element + " wins!";
-    }
-    else {
-      winner="Draw";
+    if (items[0].element == items[1].element &&
+        items[1].element == items[2].element) {
+      winner = "player " + items[0].element + " wins!";
+    } else if (items[0].element == items[4].element &&
+        items[4].element == items[8].element) {
+      winner = "player " + items[0].element + " wins!";
+    } //diagonal checking
+    else if (items[2].element == items[4].element &&
+        items[4].element == items[6].element) {
+      winner = "player " + items[2].element + " wins!";
+    } //diagonal checking
+    else if (items[3].element == items[4].element &&
+        items[4].element == items[5].element) {
+      winner = "player " + items[3].element + " wins!";
+    } else if (items[6].element == items[7].element &&
+        items[7].element == items[8].element) {
+      winner = "player " + items[6].element + " wins!";
+    } else if (items[0].element == items[3].element &&
+        items[3].element == items[6].element) {
+      winner = "player " + items[0].element + " wins!";
+    } else if (items[2].element == items[5].element &&
+        items[5].element == items[8].element) {
+      winner = "player " + items[2].element + " wins!";
+    } else {
+      winner = "Draw";
     }
   }
 
@@ -77,6 +79,7 @@ class _GameConsoleState extends State<GameConsole> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -127,6 +130,7 @@ class _GameConsoleState extends State<GameConsole> {
                 ],
               )),
               Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -176,6 +180,7 @@ class _GameConsoleState extends State<GameConsole> {
                 ],
               )),
               Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -222,28 +227,29 @@ class _GameConsoleState extends State<GameConsole> {
                     ),
                   )
                 ],
-              ))
-              ,Container(
-                child:Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                      child: 
-                   Container(
-                      height: 100,
-                      child: Card(
-                          color: Colors.pink,
-                          child: Center(
-                              child: Text(
-                            showWinner(),style: TextStyle(fontSize: 30),
-                          ))),
-                    ),
-                  )])
-              )
+              )),
+              Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        child: Card(
+                            color: Colors.pink,
+                            child: Center(
+                                child: Text(
+                              showWinner(),
+                              style: TextStyle(fontSize: 30),
+                            ))),
+                      ),
+                    )
+                  ]))
             ]),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
-            child:Text("Rules",style: TextStyle(fontSize: 10)),
+            child: Text("Rules", style: TextStyle(fontSize: 10)),
             backgroundColor: Colors.red,
             onPressed: () {
               return showModalBottomSheet(

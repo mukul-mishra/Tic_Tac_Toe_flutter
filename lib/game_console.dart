@@ -7,6 +7,7 @@ class GameConsole extends StatefulWidget {
 }
 
 class _GameConsoleState extends State<GameConsole> {
+  String winner="";
   int index;
   List<TicTacToeItem> items = [
     new TicTacToeItem("1"),
@@ -22,13 +23,49 @@ class _GameConsoleState extends State<GameConsole> {
   void chooseX(index) {
     setState(() {
       items[index].element = "X";
+      checkWinner();
     });
+    
   }
 
   void chooseO(index) {
     setState(() {
       items[index].element = "O";
+      checkWinner();
     });
+  }
+  String showWinner(){
+    setState(() {
+      checkWinner();
+    });
+    return winner;
+  }
+ 
+  void checkWinner() {
+    if(items[0].element==items[1].element && items[1].element==items[2].element) {
+      winner = "player "+items[0].element + " wins!";
+    }
+    else if(items[0].element==items[4].element && items[4].element==items[8].element) {
+      winner = "player "+ items[0].element + " wins!";
+    }//diagonal checking
+    else if(items[2].element==items[4].element && items[4].element==items[6].element) {
+      winner = "player "+ items[2].element + " wins!";
+    }//diagonal checking
+    else if(items[3].element==items[4].element && items[4].element==items[5].element) {
+      winner = "player "+ items[3].element + " wins!";
+    }
+    else if(items[6].element==items[7].element && items[7].element==items[8].element) {
+      winner = "player "+ items[6].element + " wins!";
+    }
+    else if(items[0].element==items[3].element && items[3].element==items[6].element) {
+      winner = "player "+ items[0].element + " wins!";
+    }
+    else if(items[2].element==items[5].element && items[5].element==items[8].element) {
+      winner = "player "+ items[2].element + " wins!";
+    }
+    else {
+      winner="Draw";
+    }
   }
 
   @override
@@ -186,6 +223,23 @@ class _GameConsoleState extends State<GameConsole> {
                   )
                 ],
               ))
+              ,Container(
+                child:Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                      child: 
+                   Container(
+                      height: 100,
+                      child: Card(
+                          color: Colors.pink,
+                          child: Center(
+                              child: Text(
+                            showWinner(),style: TextStyle(fontSize: 30),
+                          ))),
+                    ),
+                  )])
+              )
             ]),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
